@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'MainController@index');
-Route::get('/absen','MainController@absen');
-Route::get('/pegawai', 'MainController@pegawai');
+Route::get('/absen','MainController@absen')->name('absen');
+Route::get('/pegawai', 'MainController@pegawai')->name('pegawai.list');
+Route::get('/pegawai/create','MainController@createPegawai')->name('pegawai.create');

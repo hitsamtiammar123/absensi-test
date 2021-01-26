@@ -18,4 +18,8 @@ class MainController extends Controller
     public function pegawai(){
         return view('pegawai');
     }
+
+    public function createPegawai(){
+        return view('create-pegawai');
+    }
 }
