@@ -16,6 +16,7 @@
                                 <th scope="col">No.</th>
                                 <th>ID</th>
                                 <th>Nama</th>
+                                <th>Email</th>
                                 <th>Divisi</th>
                                 <th>Jam Masuk Terakhir</th>
                                 <th>Jam Keluar Terakhir</th>
@@ -27,6 +28,7 @@
                                 <td>1</td>
                                 <td>1</td>
                                 <td>Pak Hoho</td>
+                                <td>hehe@gmail.com</td>
                                 <td>IT</td>
                                 <td>Senin 25 January 2021, 10:00 AM</td>
                                 <td>Senin 25 January 2021, 18:00 AM</td>
@@ -39,6 +41,7 @@
                                 <td>2</td>
                                 <td>2</td>
                                 <td>Pak Hehe</td>
+                                <td>haha@gmail.com</td>
                                 <td>Finance</td>
                                 <td>Senin 25 January 2021, 10:00 AM</td>
                                 <td>Senin 25 January 2021, 18:00 AM</td>

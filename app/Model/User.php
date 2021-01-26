@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,15 +25,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'created_at', 'updated_at'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    public function division(){
+        return $this->hasOne(Division::class, 'division_id', 'id');
+    }
+
+    public function absences(){
+        return $this->hasMany(Absence::class, 'user_id', 'id');
+    }
 }

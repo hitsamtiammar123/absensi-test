@@ -9,10 +9,19 @@
                 </a>
             </div>
                 <form class="mt-5" action="" method="POST">
+                    @csrf
                     <div class="row mt-3">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Karyawan</label>
                             <input type="text" class="form-control" id="nama" placeholder="Silahkan masukan nama karyawan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Silahkan masukan email karyawan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Silahkan masukan password">
                         </div>
                         <div class="mb-3">
                             <label for="divisi" class="form-label">Divisi</label>
