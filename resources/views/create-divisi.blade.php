@@ -8,16 +8,21 @@
                     <button class="btn btn-primary">Lihat List Divisi</button>
                 </a>
             </div>
-                <form class="mt-5" action="" method="POST">
+                <form class="mt-5" action="{{route('divisi.create.post')}}" method="POST">
+                    @csrf
                     <div class="row mt-3">
                         <div class="mb-3">
                             <label for="divisi" class="form-label">Nama Divisi</label>
-                            <input type="text" class="form-control" id="divisi" placeholder="Silahkan masukan nama divisi">
+                            <input type="text" class="form-control" name="nama" id="divisi" placeholder="Silahkan masukan nama divisi">
+                            @error('nama')
+                                <p class="red">{{$errors->first('nama')}}</p>
+                            @enderror
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">
                                 Submit
                             </button>
+                            @include('template.response-crud')
                         </div>
                     </div>
                 </form>

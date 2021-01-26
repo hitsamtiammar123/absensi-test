@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Model\Division;
+use App\Model\User;
 class MainController extends Controller
 {
     //
@@ -26,7 +27,10 @@ class MainController extends Controller
     }
 
     public function pegawai(){
-        return view('pegawai');
+        $users = User::where('role','Employee')->get();
+        return view('pegawai',[
+            'users' => $users
+        ]);
     }
 
     public function createPegawai(){
@@ -37,7 +41,10 @@ class MainController extends Controller
     }
 
     public function divisi(){
-        return view('divisi');
+        $divisions = Division::all();
+        return view('divisi', [
+            'divisions' => $divisions
+        ]);
     }
 
     public function createDivisi(){

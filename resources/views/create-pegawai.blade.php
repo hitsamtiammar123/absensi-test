@@ -29,7 +29,7 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Silahkan masukan password">
                             @error('password')
-                            <p class="red">{{$errors->first('password')}}</p>
+                                <p class="red">{{$errors->first('password')}}</p>
                             @enderror
                         </div>
                         <div class="mb-3">
@@ -48,36 +48,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Submit
                             </button>
-                            @if (session('status'))
-                            @php
-                                $type = session('type');
-                                $s = '';
-                                $status = session('status');
-                                switch($type){
-                                    case 'CREATE':
-                                        $s = 'dibuat';
-                                    break;
-                                    case 'UPDATE':
-                                        $s = 'diubah';
-                                    break;
-                                }
-
-                            @endphp
-                                @if ($status === 'SUCCESS')
-                                    <p class="green">
-                                        Data Berhasil {{$s}}
-                                    </p>
-                                @elseif($status === 'FAILED')
-                                    <p class="green">
-                                        Terjadi kesalahan saat menambahkan data, mohon dicoba beberapa saat lagi
-                                    </p>
-                                @endif
-                                <style>
-                                    .green{
-                                        color: green
-                                    }
-                                </style>
-                            @endif
+                            @include('template.response-crud')
                         </div>
                     </div>
                 </form>

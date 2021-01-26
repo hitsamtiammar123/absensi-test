@@ -30,7 +30,7 @@ class User extends Authenticatable
 
 
     public function division(){
-        return $this->hasOne(Division::class, 'division_id', 'id');
+        return $this->hasOne(Division::class, 'id', 'division_id');
     }
 
     public function absences(){

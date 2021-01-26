@@ -13,35 +13,28 @@
                 <table class="table table-hover mt-4">
                     <thead>
                         <tr>
-                            <th scope="col">No.</th>
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>IT</td>
-                            <td>
-                                <button type="button" class="btn btn-success">Update</button>
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>Finance</td>
-                            <td>
-                                <button type="button" class="btn btn-success">Update</button>
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                            </td>
-                        </tr>
+                        @foreach ($divisions as $divisi)
+                            <tr>
+                                <td>{{$divisi->id}}</td>
+                                <td>{{$divisi->nama}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success">Update</button>
+                                    <button type="button" class="btn btn-danger" onclick="onDelete({{$divisi->id}})">Hapus</button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                @include('components.delete-status')
             </div>
         </div>
     </div>
 </section>
+@include('components.delete-modal',['route' => 'divisi.delete'])
 @endsection

@@ -9,11 +9,10 @@
                 </a>
             </div>
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-11">
                     <table class="table table-hover mt-4">
                         <thead>
                             <tr>
-                                <th scope="col">No.</th>
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Email</th>
@@ -24,36 +23,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>Pak Hoho</td>
-                                <td>hehe@gmail.com</td>
-                                <td>IT</td>
-                                <td>Senin 25 January 2021, 10:00 AM</td>
-                                <td>Senin 25 January 2021, 18:00 AM</td>
-                                <td>
-                                    <button type="button" class="btn btn-success">Update</button>
-                                    <button type="button" class="btn btn-danger">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>Pak Hehe</td>
-                                <td>haha@gmail.com</td>
-                                <td>Finance</td>
-                                <td>Senin 25 January 2021, 10:00 AM</td>
-                                <td>Senin 25 January 2021, 18:00 AM</td>
-                                <td>
-                                    <button type="button" class="btn btn-success">Update</button>
-                                    <button type="button" class="btn btn-danger">Hapus</button>
-                                </td>
-                            </tr>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->division === null ?'':$user->division->nama}}</td>
+                                    <td>Senin 25 January 2021, 10:00 AM</td>
+                                    <td>Senin 25 January 2021, 18:00 AM</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success">Update</button>
+                                        <button type="button" onclick="onDelete({{$user->id}})" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Hapus</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    @include('components.delete-status')
                 </div>
             </div>
         </div>
     </section>
+    @include('components.delete-modal',['route' => 'pegawai.delete'])
 @endsection

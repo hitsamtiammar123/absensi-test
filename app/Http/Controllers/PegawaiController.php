@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\User;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Traits\RedirectionResponse;
 
 class PegawaiController extends Controller
 {
     //
+    use RedirectionResponse;
 
     protected function makePegawaiValidator(Request $request){
         return Validator::make($request->all(), [
@@ -28,19 +30,13 @@ class PegawaiController extends Controller
         ]);
     }
 
-    protected function failedRedirection($route){
-        return redirect()->route('pegawai.create')->with([
-            'status' => 'FAILED',
-            'type' => 'CREATE'
-        ]);
-    }
-
     public function createPegawai(Request $request){
         $validator = $this->makePegawaiValidator($request);
         if($validator->fails()){
             return back()->withErrors($validator);
         }
-        $result -= 0;
+        $result = 0;
+        $type = 'pegawai.create';
         try{
             $pegawai = new User();
             $pegawai->email = $request->email;
@@ -50,11 +46,22 @@ class PegawaiController extends Controller
             $pegawai->role = 'EMPLOYEE';
             $result = $pegawai->save();
         }catch(\Exception $err){
-            return $this->failedRedirection('pegawai.create');
+            return $this->failedRedirection($type);
         }
-        return $result ? redirect()->route('pegawai.create')->with([
-            'status' => 'SUCCESS',
-            'type' => 'CREATE'
-        ]) : $this->failedRedirection();
+        return $this->successRedirection($result, $type, 'CREATE');
+    }
+
+    public function deletePegawai($id){
+        $user = User::find($id);
+        $type = 'pegawai.list';
+        if($user){
+            $id = $user->id;
+            $result = $user->delete();
+            return redirect()->route($type)->with([
+                'status' => 'SUCCESS_DELETE',
+                'message' => 'Berhasil menghapus pegawai dengan ID '.$id
+            ]);
+        }
+        return redirect()->route($type);
     }
 }
