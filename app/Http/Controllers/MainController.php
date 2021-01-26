@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Model\Division;
 class MainController extends Controller
 {
     //
@@ -29,7 +30,10 @@ class MainController extends Controller
     }
 
     public function createPegawai(){
-        return view('create-pegawai');
+        $divisions = Division::all();
+        return view('create-pegawai', [
+            'divisions' => $divisions,
+        ]);
     }
 
     public function divisi(){
@@ -37,6 +41,7 @@ class MainController extends Controller
     }
 
     public function createDivisi(){
+
         return view('create-divisi');
     }
 }

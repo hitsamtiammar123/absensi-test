@@ -22,7 +22,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/pegawai', 'MainController@pegawai')->name('pegawai.list');
         Route::get('/pegawai/create','MainController@createPegawai')->name('pegawai.create');
         Route::get('/divisi', 'MainController@divisi')->name('divisi.list');
-        Route::get('divisi/create','MainController@createDivisi')->name('divisi.create');
+        Route::get('/divisi/create','MainController@createDivisi')->name('divisi.create');
+        Route::post('/divisi','PegawaiController@createPegawai')->name('pegawai.create.post');
     });
     Route::group(['middleware' => 'user:employee'], function(){
         Route::get('/absen','MainController@absen')->name('absen');
