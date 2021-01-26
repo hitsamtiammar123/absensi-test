@@ -21,12 +21,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'user:admin'], function(){
         Route::get('/pegawai', 'MainController@pegawai')->name('pegawai.list');
         Route::get('/pegawai/create','MainController@createPegawai')->name('pegawai.create');
+        Route::post('/pegawai','PegawaiController@createPegawai')->name('pegawai.create.post');
+        Route::get('/pegawai/{id}/delete','PegawaiController@deletePegawai')->name('pegawai.delete');
+        Route::get('/pegawai/{id}/update','MainController@updatePegawai')->name('pegawai.update');
+        Route::post('/pegawai/{id}/update','PegawaiController@updatePegawai')->name('pegawai.update.post');
+
         Route::get('/divisi', 'MainController@divisi')->name('divisi.list');
         Route::get('/divisi/create','MainController@createDivisi')->name('divisi.create');
-        Route::post('/pegawai','PegawaiController@createPegawai')->name('pegawai.create.post');
-        Route::post('/divisi','DivisionController@createDivision')->name('divisi.create.post');
-        Route::get('/pegawai/{id}/delete','PegawaiController@deletePegawai')->name('pegawai.delete');
+        Route::post('/divisi/{id}/update','DivisionController@updateDivision')->name('divisi.update.post');
         Route::get('/divisi/{id}/delete','DivisionController@deleteDivision')->name('divisi.delete');
+        Route::get('/divisi/{id}/update','MainController@updateDivisi')->name('divisi.update');
+        Route::post('/divisi','DivisionController@createDivision')->name('divisi.create.post');
+
 
     });
     Route::group(['middleware' => 'user:employee'], function(){

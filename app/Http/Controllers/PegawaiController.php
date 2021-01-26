@@ -12,43 +12,63 @@ class PegawaiController extends Controller
     //
     use RedirectionResponse;
 
-    protected function makePegawaiValidator(Request $request){
-        return Validator::make($request->all(), [
+    protected function makePegawaiValidator(Request $request, $type = 'CREATE'){
+        $condition = [
             'name' => 'required',
-            'email' => 'required|email|max:100|unique:users,email',
-            'password' => 'required',
-            'division' => ['required', function($attribute, $value, $fail){
+            'email' => 'required|email|max:100',
+            'division' => ['required', 'num' => function($attribute, $value, $fail){
                 if(intval($value) === -1){
                     $fail($attribute.' harus diisi');
                 }
             }]
-        ], [
+        ];
+        switch($type){
+            case 'CREATE':
+                $condition['password'] = 'required';
+                $condition['email'].= '|unique:users,email';
+            break;
+
+        }
+        return Validator::make($request->all(), $condition, [
             'required' => 'data :attribute harus diisi',
             'email' => 'format email salah',
             'max' => 'data :attribute maksimal :max karakter',
-            'unique' => 'data :attribute sudah ada'
+            'unique' => 'data :attribute sudah ada',
         ]);
     }
 
-    public function createPegawai(Request $request){
-        $validator = $this->makePegawaiValidator($request);
+    protected function applyPegawaiData(User $pegawai, Request $request, $route, $type, $params = []){
+        $validator = $this->makePegawaiValidator($request, $type);
         if($validator->fails()){
             return back()->withErrors($validator);
         }
         $result = 0;
-        $type = 'pegawai.create';
+        // $type = 'pegawai.create';
         try{
-            $pegawai = new User();
+            // $pegawai = new User();
             $pegawai->email = $request->email;
             $pegawai->name = $request->name;
-            $pegawai->password = \bcrypt($request->password);
+            $request->password ? $pegawai->password = \bcrypt($request->password) : null;
             $pegawai->division_id = $request->division;
             $pegawai->role = 'EMPLOYEE';
             $result = $pegawai->save();
         }catch(\Exception $err){
             return $this->failedRedirection($type);
         }
-        return $this->successRedirection($result, $type, 'CREATE');
+        return $this->successRedirection($result, $route, $type, $params);
+    }
+
+    public function createPegawai(Request $request){
+        $pegawai = new User();
+        return $this->applyPegawaiData($pegawai, $request, 'pegawai.create', 'CREATE');
+    }
+
+    public function updatePegawai(Request $request, $id){
+        $pegawai = User::find($id);
+        if($pegawai){
+            return $this->applyPegawaiData($pegawai, $request, 'pegawai.update', 'UPDATE', ['id' => $id]);
+        }
+        return \redirect()->route('pegawai.list');
     }
 
     public function deletePegawai($id){

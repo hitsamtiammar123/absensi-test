@@ -19,22 +19,34 @@ class DivisionController extends Controller
         ]);
     }
 
-    public function createDivision(Request $request){
+    protected function applyDivisionData(Division $division, Request $request, $route, $type, $params = []){
         $validator = $this->makeDivisionValidator($request);
         if($validator->fails()){
             return back()->withErrors($validator);
         }
         $result = 0;
-        $type = 'divisi.create';
+        // $type = 'divisi.create';
         try{
-            $division = new Division();
             $division->nama = $request->nama;
             $result = $division->save();
         }catch(Exception $err){
-            return $this->failedRedirection($type);
+            return $this->failedRedirection($route, $params);
         }
 
-        return $this->successRedirection($result, $type, 'CREATE');
+        return $this->successRedirection($result, $route, $type, $params);
+    }
+
+    public function createDivision(Request $request){
+        $division = new Division();
+        return $this->applyDivisionData($division, $request, 'divisi.create', 'CREATE');
+    }
+
+    public function updateDivision(Request $request, $id){
+        $division = Division::find($id);
+        if($division){
+            return $this->applyDivisionData($division, $request, 'divisi.update', 'UPDATE', ['id' => $id]);
+        }
+        return redirect()->route('divisi.list');
     }
 
     public function deleteDivision($id){

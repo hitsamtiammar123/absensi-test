@@ -13,6 +13,11 @@ class Absence extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $casts = [
+        'in_hour' => 'datetime',
+        'out_hour' => 'datetime'
+    ];
+
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }

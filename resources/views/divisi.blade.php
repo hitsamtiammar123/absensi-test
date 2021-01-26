@@ -24,7 +24,9 @@
                                 <td>{{$divisi->id}}</td>
                                 <td>{{$divisi->nama}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success">Update</button>
+                                    <button type="button" class="btn btn-success">
+                                        <a class="link" href="{{route('divisi.update',['id' => $divisi->id])}}">Update</a>
+                                    </button>
                                     <button type="button" class="btn btn-danger" onclick="onDelete({{$divisi->id}})">Hapus</button>
                                 </td>
                             </tr>

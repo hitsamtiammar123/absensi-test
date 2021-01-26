@@ -36,8 +36,24 @@ class MainController extends Controller
     public function createPegawai(){
         $divisions = Division::all();
         return view('create-pegawai', [
+            'title' => 'Buat Pegawai Baru',
+            'route' => route('pegawai.create.post'),
             'divisions' => $divisions,
         ]);
+    }
+
+    public function updatePegawai($id){
+        $divisions = Division::all();
+        $user = User::find($id);
+        if($user !== null){
+            return view('create-pegawai',[
+                'title' => 'Ubah Pegawai',
+                'route' => route('pegawai.update.post', ['id' => $id]),
+                'user' => $user,
+                'divisions' => $divisions,
+            ]);
+        }
+        return \redirect()->route('pegawai.list');
     }
 
     public function divisi(){
@@ -48,7 +64,21 @@ class MainController extends Controller
     }
 
     public function createDivisi(){
+        return view('create-divisi', [
+            'title' => 'Buat Divisi Baru',
+            'route' => route('divisi.create.post')
+        ]);
+    }
 
-        return view('create-divisi');
+    public function updateDivisi($id){
+        $division = Division::find($id);
+        if($division !== null){
+            return view('create-divisi',[
+                'title' => 'Ubah Divisi',
+                'route' => route('divisi.update.post',['id' => $division->id]),
+                'division' => $division
+            ]);
+        }
+        return redirect()->route('divisi.list');
     }
 }

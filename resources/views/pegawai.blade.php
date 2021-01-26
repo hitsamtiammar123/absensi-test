@@ -32,7 +32,9 @@
                                     <td>Senin 25 January 2021, 10:00 AM</td>
                                     <td>Senin 25 January 2021, 18:00 AM</td>
                                     <td>
-                                        <button type="button" class="btn btn-success">Update</button>
+                                        <button type="button" class="btn btn-success">
+                                            <a class="link" href="{{route('pegawai.update.post',['id' => $user->id])}}">Update</a>
+                                        </button>
                                         <button type="button" onclick="onDelete({{$user->id}})" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Hapus</button>
                                     </td>
                                 </tr>
