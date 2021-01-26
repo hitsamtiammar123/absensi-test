@@ -22,4 +22,12 @@ class MainController extends Controller
     public function createPegawai(){
         return view('create-pegawai');
     }
+
+    public function divisi(){
+        return view('divisi');
+    }
+
+    public function createDivisi(){
+        return view('create-divisi');
+    }
 }

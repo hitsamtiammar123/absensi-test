@@ -17,6 +17,8 @@
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Divisi</th>
+                                <th>Jam Masuk Terakhir</th>
+                                <th>Jam Keluar Terakhir</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -26,6 +28,8 @@
                                 <td>1</td>
                                 <td>Pak Hoho</td>
                                 <td>IT</td>
+                                <td>Senin 25 January 2021, 10:00 AM</td>
+                                <td>Senin 25 January 2021, 18:00 AM</td>
                                 <td>
                                     <button type="button" class="btn btn-success">Update</button>
                                     <button type="button" class="btn btn-danger">Hapus</button>
@@ -36,6 +40,8 @@
                                 <td>2</td>
                                 <td>Pak Hehe</td>
                                 <td>Finance</td>
+                                <td>Senin 25 January 2021, 10:00 AM</td>
+                                <td>Senin 25 January 2021, 18:00 AM</td>
                                 <td>
                                     <button type="button" class="btn btn-success">Update</button>
                                     <button type="button" class="btn btn-danger">Hapus</button>

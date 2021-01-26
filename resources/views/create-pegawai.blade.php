@@ -8,7 +8,7 @@
                     <button class="btn btn-primary">Lihat List Karyawan</button>
                 </a>
             </div>
-                <form action="" method="POST">
+                <form class="mt-5" action="" method="POST">
                     <div class="row mt-3">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Karyawan</label>
