@@ -23,7 +23,10 @@ class MainController extends Controller
     }
 
     public function absen(){
-        return view('absen');
+        $user = Auth::user();
+        return view('absen', [
+            'user' => $user
+        ]);
     }
 
     public function pegawai(){

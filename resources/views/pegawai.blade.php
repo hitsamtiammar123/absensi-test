@@ -28,9 +28,9 @@
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->division === null ?'':$user->division->nama}}</td>
-                                    <td>Senin 25 January 2021, 10:00 AM</td>
-                                    <td>Senin 25 January 2021, 18:00 AM</td>
+                                    <td>{{$user->division === null ? '' : $user->division->nama}}</td>
+                                    <td>{{$user->today_absences === null ? '' : $user->today_absences->in_hour_formated}}</td>
+                                    <td>{{$user->today_absences === null ? '' : $user->today_absences->out_hour_formated}}</td>
                                     <td>
                                         <button type="button" class="btn btn-success">
                                             <a class="link" href="{{route('pegawai.update.post',['id' => $user->id])}}">Update</a>

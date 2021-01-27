@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::group(['middleware' => 'user:employee'], function(){
         Route::get('/absen','MainController@absen')->name('absen');
+        Route::post('/absen/in','AbsenceController@absenceIn')->name('absen.in');
+        Route::post('/absen/out','AbsenceController@absenceOut')->name('absen.out');
     });
     Route::get('/logout', 'AuthController@logout')->name('logout');
 });
